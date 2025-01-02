@@ -181,6 +181,7 @@
             height: 200px;
             object-fit: cover;
             border-radius: 5px;
+            cursor: pointer;
         }
 
         .gallery-item h3 {
@@ -188,6 +189,37 @@
             margin-top: 1rem;
             color: #2c5282;
             text-align: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            background: transparent;
+            border: none;
         }
 
         .contact-email {
@@ -276,5 +308,29 @@
     <footer>
         <p>&copy; 2024 Porcelaintic. All rights reserved. Follow us on <a href="#">Instagram</a> and <a href="#">Facebook</a>.</p>
     </footer>
+
+    <div class="modal" id="imageModal">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <img id="modalImage" src="" alt="Enlarged view">
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.gallery-item img');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+
+        images.forEach(image => {
+            image.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                modalImage.src = image.src;
+                modalImage.alt = image.alt;
+            });
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+            modalImage.src = '';
+        }
+    </script>
 </body>
 </html>
